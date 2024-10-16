@@ -27,9 +27,9 @@ The fields in the table below can be used in these parts of STAC documents:
 
 | Field Name           | Type                               | Description                                  |
 | -------------------- | ---------------------------------- | -------------------------------------------- |
-| `merkle:item_hash`     | string                             | **REQUIRED**. A cryptographic hash of the Item's metadata, used to verify the integrity of the Item.
-| `merkle:hash_method`   | [Hash Method Object](#hash-object) | **REQUIRED**. An object describing the method used to compute merkle:item_hash, including the hash function and the fields included in the computation.                        |
-| `merkle:root`          | string                             | **REQUIRED**. The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all Items and sub-Collections/Catalogs.                      |
+| `merkle:item_hash`     | string                             | **REQUIRED**. (in Items). A cryptographic hash of the Item's metadata, used to verify the integrity of the Item.
+| `merkle:hash_method`   | [Hash Method Object](#hash-method-object) | **REQUIRED**. (in Items and Collections). An object describing the method used to compute `merkle:item_hash` or `merkle:root`, including the hash function, fields included, and ordering.                        |
+| `merkle:root`          | string                             | **REQUIRED**. (in Collections and Catalogs). The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all Items and sub-Collections/Catalogs.                      |
 
 ### Additional Field Information
 
@@ -41,7 +41,7 @@ The fields in the table below can be used in these parts of STAC documents:
 #### merkle:hash_method
 
 - **Type:** Hash Method Object
-- **Description:** An object that specifies how `merkle:item_has`h was computed, including the hash function used and which fields were included. This provides transparency and allows users to accurately verify the hash.
+- **Description:** An object that specifies how merkle:item_hash (in Items) or merkle:root (in Collections and Catalogs) was computed, including the hash function used, the ordering of hashes, and any special considerations. This provides transparency and allows users to accurately verify the hash.
 
 #### merkle:root
 
@@ -52,10 +52,11 @@ The fields in the table below can be used in these parts of STAC documents:
 
 The `merkle:hash_method` object provides details about the hash computation method used for `merkle:item_hash`.
 
-| Field Name | Type   | Description                                  |
-| ---------- | ------ | -------------------------------------------- |
-| function         | string | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`). |
-| fields          | [string] | **REQUIRED**. An array of fields included in the hash computation. For nested fields, dot notation should be used (e.g., properties.datetime, assets.image). |
+| Field Name     | Type   | Description                                  |
+| -------------- | ------ | -------------------------------------------- |
+| function         | string | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`). 
+| fields          | [string] | **REQUIRED** (for Items). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate that all fields are included. For nested fields, dot notation should be used (e.g., properties.datetime, assets.image). 
+| ordering         | string | **REQUIRED** (for Collections). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by merkle:item_hash value"). 
 | description          | string | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations. |
 
 ## Relation types
