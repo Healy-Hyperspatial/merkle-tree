@@ -1,14 +1,13 @@
-# Template Extension Specification
+# Merkle Root Extension Specification
 
-- **Title:** Template
-- **Identifier:** <https://stac-extensions.github.io/template/v1.0.0/schema.json>
-- **Field Name Prefix:** template
+- **Title:** Merkle Root
+- **Identifier:** <https://stac-extensions.github.io/merkle/v1.0.0/schema.json>
+- **Field Name Prefix:** merkle
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @your-gh-handles @person2
+- **Owner**: @jonhealy1
 
-This document explains the Template Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This is the place to add a short introduction.
+This extension specifies a way to ensure metadata integrity for STAC items, collections and catalogs by encoding them in a Merkle Tree via hashing. Items are hashed using a hash function, ie Sha-256, and this hash is stored as a field in an items properties. Details concerning the methods used for hashing are stored in a separate object. To produce the Merkle root identifier for a collection, the hash from every item is taken into account. This process ensures the integrity of stac items and collections. Additionally, where multiple collections make up a catalog, the merkle root identifiers from each collection can be used to create a merkle root identifier for the whole catalog.  
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -20,10 +19,10 @@ This is the place to add a short introduction.
 
 The fields in the table below can be used in these parts of STAC documents:
 
-- [ ] Catalogs
+- [x] Catalogs
 - [x] Collections
 - [x] Item Properties (incl. Summaries in Collections)
-- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
 | Field Name           | Type                      | Description                                  |
