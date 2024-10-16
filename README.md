@@ -48,15 +48,15 @@ The fields in the table below can be used in these parts of STAC documents:
 - **Type:** string
 - **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:item_hash` values (for Collections) or from the `merkle:root` values of child Collections and Catalogs (for Catalogs). This root hash provides a single value that represents the integrity of all underlying Items and Collections.
 
-### XYZ Object
+### Hash Method Object
 
-This is the introduction for the purpose and the content of the XYZ Object...
+The `merkle:hash_method` object provides details about the hash computation method used for `merkle:item_hash`.
 
 | Field Name | Type   | Description                                  |
 | ---------- | ------ | -------------------------------------------- |
-| x          | number | **REQUIRED**. Describe the required field... |
-| y          | number | **REQUIRED**. Describe the required field... |
-| z          | number | **REQUIRED**. Describe the required field... |
+| function         | string | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`). |
+| fields          | [string] | **REQUIRED**. An array of fields included in the hash computation. For nested fields, dot notation should be used (e.g., properties.datetime, assets.image). |
+| description          | string | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations. |
 
 ## Relation types
 
