@@ -2,12 +2,12 @@
 
 - **Title:** Merkle Root
 - **Identifier:** <https://stac-extensions.github.io/merkle/v1.0.0/schema.json>
-- **Field Name Prefix:** merkle
-- **Scope:** Item, Collection
+- **Field Name Prefix:** `merkle`
+- **Scope:** Item, Collection, Catalog
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @jonhealy1
-
-This extension specifies a way to ensure metadata integrity for STAC items, collections and catalogs by encoding them in a Merkle Tree via hashing. Items are hashed using a hash function, ie Sha-256, and this hash is stored as a field in an items properties. Details concerning the methods used for hashing are stored in a separate object. To produce the Merkle root identifier for a collection, the hash from every item is taken into account. This process ensures the integrity of stac items and collections. Additionally, where multiple collections make up a catalog, the merkle root identifiers from each collection can be used to create a merkle root identifier for the whole catalog.  
+  
+This extension specifies a way to ensure metadata integrity for STAC Items, Collections and catalogs by encoding them in a Merkle Tree via hashing. Items are hashed using a hash function (e.g., SHA-256), and this hash is stored as a field in an item's properties. Details concerning the methods used for hashing are stored in a separate object. To produce the Merkle root identifier for a Collection, the hash from every Item is taken into account. This process ensures the integrity of STAC Items and Collections. Additionally, where multiple Collections make up a Catalog, the Merkle Root identifiers from each Collection can be used to create a Merkle root identifier for the whole Catalog.  
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -25,17 +25,28 @@ The fields in the table below can be used in these parts of STAC documents:
 - [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
-| Field Name           | Type                      | Description                                  |
-| -------------------- | ------------------------- | -------------------------------------------- |
-| template:new_field   | string                    | **REQUIRED**. Describe the required field... |
-| template:xyz         | [XYZ Object](#xyz-object) | Describe the field...                        |
-| template:another_one | \[number]                 | Describe the field...                        |
+| Field Name           | Type                               | Description                                  |
+| -------------------- | ---------------------------------- | -------------------------------------------- |
+| `merkle:item_hash`     | string                             | **REQUIRED**. A cryptographic hash of the Item's metadata, used to verify the integrity of the Item.
+| `merkle:hash_method`   | [Hash Method Object](#hash-object) | **REQUIRED**. An object describing the method used to compute merkle:item_hash, including the hash function and the fields included in the computation.                        |
+| `merkle:root`          | string                             | **REQUIRED**. The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all Items and sub-Collections/Catalogs.                      |
 
 ### Additional Field Information
 
-#### template:new_field
+#### merkle:item_hash
 
-This is a much more detailed description of the field `template:new_field`...
+- **Type:** string
+- **Description:** A cryptographic hash of the Item's metadata, computed according to the method specified in `merkle:hash_method`. This hash allows users to verify that the Item's metadata has not been altered.
+
+#### merkle:hash_method
+
+- **Type:** Hash Method Object
+- **Description:** An object that specifies how `merkle:item_has`h was computed, including the hash function used and which fields were included. This provides transparency and allows users to accurately verify the hash.
+
+#### merkle:root
+
+- **Type:** string
+- **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:item_hash` values (for Collections) or from the `merkle:root` values of child Collections and Catalogs (for Catalogs). This root hash provides a single value that represents the integrity of all underlying Items and Collections.
 
 ### XYZ Object
 
