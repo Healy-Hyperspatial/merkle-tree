@@ -22,6 +22,6 @@
     }
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+    "https://raw.githubusercontent.com/Healy-Hyperspatial/merkle-tree-stac-extension/refs/heads/main/json-schema/schema.json"
   ]
 }
