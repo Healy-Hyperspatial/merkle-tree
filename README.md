@@ -49,7 +49,7 @@ the `merkle:hash_method`. This hash allows users to verify that the object's met
 - **Type:** [Hash Method Object](#hash-method-object)
 - **Description:**
     - An object that specifies how `merkle:object_hash` and `merkle:root` were computed, including:
-        - The hash function used.
+    - The hash function used.
         - The fields included in the hash computation.
         - The ordering of hashes when building the Merkle tree.
         - Any special considerations (e.g., serialization format).
@@ -74,7 +74,8 @@ The `merkle:hash_method` object provides details about the hash computation meth
 | ------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `function`    | string     | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`).                                                                                |
 | `fields`      | \[string\] | **REQUIRED** (for all objects). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate 
-that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). |
+that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). 
+                                    |
 | `ordering`    | string     | **REQUIRED** (for Collections and Catalogs). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by hash value").               |
 | `description` | string     | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations.                            |
 
