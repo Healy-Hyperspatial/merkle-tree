@@ -1,0 +1,27 @@
+{
+  "type": "Catalog",
+  "stac_version": "1.1.0",
+  "id": "catalog-001",
+  "description": "Sample Catalog with Merkle Root",
+  "merkle:object_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:hash_method": {
+    "function": "sha256",
+    "fields": ["*"],
+    "ordering": "ascending",
+    "description": "Computed by including merkle:object_hash values of child objects in ascending order and building the Merkle tree."
+  },
+  "links": [
+    {
+      "rel": "child",
+      "href": "collection-123.json"
+    },
+    {
+      "rel": "child",
+      "href": "collection-456.json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+  ]
+}
