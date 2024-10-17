@@ -7,11 +7,12 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @jonhealy1
   
-This extension specifies a way to ensure metadata integrity for STAC Items, Collections and catalogs by encoding them in a Merkle Tree via hashing. Items are hashed using a hash function (e.g., SHA-256), and this hash is stored as a field in an item's properties. Details concerning the methods used for hashing are stored in a separate object. To produce the Merkle root identifier for a Collection, the hash from every Item is taken into account. This process ensures the integrity of STAC Items and Collections. Additionally, where multiple Collections make up a Catalog, the Merkle Root identifiers from each Collection can be used to create a Merkle root identifier for the whole Catalog.  
+This extension specifies a way to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle Tree via hashing. Items are hashed using a hash function (e.g., SHA-256), and this hash is stored as a field in an Item's properties. Details concerning the methods used for hashing are stored in a separate object. To produce the Merkle root identifier for a Collection, the hash from every Item is taken into account. This process ensures the integrity of STAC Items and Collections. Additionally, where multiple Collections make up a Catalog, the Merkle root identifiers and collection hashes from each Collection can be used to create a Merkle root identifier for the whole Catalog. 
 
 - Examples:
-  - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
-  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
+  - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item.
+  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection.
+  - [Catalog example](examples/catalog.json): Shows the basic usage of the extension in a STAC Catalog.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -27,9 +28,10 @@ The fields in the table below can be used in these parts of STAC documents:
 
 | Field Name           | Type                               | Description                                  |
 | -------------------- | ---------------------------------- | -------------------------------------------- |
-| `merkle:item_hash`     | string                             | **REQUIRED**. (in Items). A cryptographic hash of the Item's metadata, used to verify the integrity of the Item.
-| `merkle:hash_method`   | [Hash Method Object](#hash-method-object) | **REQUIRED**. (in Items and Collections). An object describing the method used to compute `merkle:item_hash` or `merkle:root`, including the hash function, fields included, and ordering.                        |
-| `merkle:root`          | string                             | **REQUIRED**. (in Collections and Catalogs). The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all Items and sub-Collections/Catalogs.                      |
+| `merkle:item_hash`     | string                             | **REQUIRED** (in Items). A cryptographic hash of the Item's metadata, used to verify the integrity of the Item.  |
+| `merkle:collection_hash`   | string                        | **REQUIRED** (in Collections, Catalogs). **Optional** in Items. Specifies how hashes were computed. Items inherit this from their parent Collection but may include it if they use a different method.     |
+| `merkle:hash_method`   | [Hash Method Object](#hash-method-object) | **REQUIRED** (in Collections, Catalogs). An object describing the method used to compute merkle:item_hash, merkle:collection_hash, or merkle:root, including the hash function, fields included, ordering, and any special considerations.    |                       |
+| `merkle:root`          | string                             | **REQUIRED** (in Collections, Catalogs). The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all Items and sub-Collections/Catalogs.                      |
 
 ### Additional Field Information
 
@@ -38,25 +40,38 @@ The fields in the table below can be used in these parts of STAC documents:
 - **Type:** string
 - **Description:** A cryptographic hash of the Item's metadata, computed according to the method specified in `merkle:hash_method`. This hash allows users to verify that the Item's metadata has not been altered.
 
+#### merkle:collection_hash
+
+- **Type:** string
+- **Description:** A cryptographic hash of the Collection's own metadata, computed according to the method specified in the Collection's `merkle:hash_method`. This hash allows users to verify that the Collection's metadata has not been altered.
+
 #### merkle:hash_method
 
 - **Type:** Hash Method Object
-- **Description:** An object that specifies how `merkle:item_hash` (in Items) or `merkle:root` (in Collections and Catalogs) was computed, including the hash function used, the fields included, ordering, and any special considerations. This provides transparency and allows users to accurately verify the hash.
-
+- **Description:**
+    - An object that specifies how `merkle:item_hash`, `merkle:collection_hash`, or `merkle:root` was computed, including:
+        - The hash function used.
+        - The fields included in the hash computation.
+        - The ordering of hashes when building the Merkle tree.
+        - Any special considerations (e.g., serialization format).
+    - This provides transparency and allows users to accurately verify the hashes.
+- **Usage:**
+    - **Collections and Catalogs:** This object is **REQUIRED** and must be included in the `properties` object.
+    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own `merkle:hash_method` if it uses a different hash method than the Collection.
 #### merkle:root
 
 - **Type:** string
-- **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:item_hash` values (for Collections) or from the `merkle:root` values of child Collections and Catalogs (for Catalogs). This root hash provides a single value that represents the integrity of all underlying Items and Collections.
+- **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:item_hash` values and `merkle:collection_hash` (for Collections), or from the `merkle:root` and `merkle:collection_hash` values of child Collections and Catalogs (for Catalogs). This root hash provides a single value that represents the integrity of all underlying Items, Collections, and Catalogs.
 
 ### Hash Method Object
 
-The `merkle:hash_method` object provides details about the hash computation method used for `merkle:item_hash`.
+The `merkle:hash_method` object provides details about the hash computation method used for `merkle:item_hash`, `merkle:collection_hash`, and `merkle:root`.
 
 | Field Name     | Type   | Description                                  |
 | -------------- | ------ | -------------------------------------------- |
 | `function`         | string | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`). 
-| `fields`          | [string] | **REQUIRED** (for Items). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). 
-| `ordering`         | string | **REQUIRED** (for Collections). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by merkle:item_hash value"). 
+| `fields`          | [string] | **REQUIRED** (for Items and Collections). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). 
+| `ordering`         | string | **REQUIRED** (for Collections and Catalogs). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by hash value"). 
 | `description`          | string | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations. |
 
 ## Computing Hashes and Merkle Roots
@@ -70,11 +85,25 @@ The `merkle:hash_method` object provides details about the hash computation meth
    - Ensure consistent encoding (e.g., UTF-8).
 3. Compute Hash:
    - Apply the specified cryptographic hash function (e.g., SHA-256) to the serialized metadata.
+  
+### Computing `merkle:collection_hash`
+1. Prepare Metadata:
+    - Include all fields specified in `merkle:hash_method.fields` in the Collection.
+    - If fields is "*" or "all", include all fields of the Collection.
+2. Serialize Metadata:
+    - Use canonical JSON serialization with sorted keys and consistent formatting.
+    - Ensure consistent encoding (e.g., UTF-8).
+3. Compute Hash:
+    - Apply the specified cryptographic hash function to the serialized metadata.
 
 ### Computing `merkle:root` for Collections and Catalogs
 1. Collect Hashes:
-   - For Collections: Gather `merkle:item_hash` values from all Items.
-   - For Catalogs: Gather `merkle:root` values from all child Collections and Catalogs.
+   - For **Collections**:
+       - Gather `merkle:item_hash` values from all Items.
+       - Include the `merkle:collection_hash` of the Collection itself.
+   - For **Catalogs**:
+       - Gather `merkle:collection_hash` and `merkle:root` values from all child Collections and Catalogs.
+       - Include the `merkle:collection_hash` of the Catalog itself (if applicable).
 2. Order Hashes:
    - Order the hashes according to the method specified in `merkle:hash_method.ordering`.
 3. Build Merkle Tree:
@@ -92,11 +121,6 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "properties": {
     "datetime": "2024-10-15T12:00:00Z",
     "merkle:item_hash": "3a7bd3e2360a8e7d9f5b1c2d4e6f7890abcdef1234567890abcdef1234567890",
-    "merkle:hash_method": {
-      "function": "sha256",
-      "fields": ["*"],
-      "description": "Computed using canonical JSON serialization of all fields."
-    }
     // ... other properties
   },
   "geometry": {
@@ -120,11 +144,13 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "id": "collection-123",
   "description": "Sample Collection with Merkle Root",
   "properties": {
+    "merkle:collection_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
     "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
     "merkle:hash_method": {
       "function": "sha256",
+      "fields": ["*"],
       "ordering": "ascending",
-      "description": "Computed by ordering `merkle:item_hash` values in ascending order and building the Merkle tree."
+      "description": "Computed by including merkle:collection_hash and merkle:item_hash values in ascending order and building the Merkle tree."
     }
     // ... other properties
   },
@@ -146,11 +172,13 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "id": "catalog-001",
   "description": "Sample Catalog with Merkle Root",
   "properties": {
+    "merkle:collection_hash": "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
     "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
     "merkle:hash_method": {
       "function": "sha256",
+      "fields": ["*"],
       "ordering": "ascending",
-      "description": "Computed by ordering `merkle:root` values of child Collections in ascending order and building the Merkle tree."
+      "description": "Computed by including merkle:collection_hash and merkle:root values of child Collections in ascending order and building the Merkle tree."
     }
   },
   "links": [
