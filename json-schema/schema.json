@@ -47,36 +47,29 @@
           "type": "object",
           "required": [
             "type",
-            "properties"
+            "id",
+            "merkle:object_hash",
+            "merkle:hash_method",
+            "merkle:root"
           ],
           "properties": {
             "type": {
               "const": "Collection"
             },
-            "properties": {
-              "type": "object",
-              "required": [
-                "merkle:object_hash",
-                "merkle:hash_method",
-                "merkle:root"
-              ],
-              "properties": {
-                "merkle:object_hash": {
-                  "type": "string",
-                  "description": "A cryptographic hash of the Collection's metadata."
-                },
-                "merkle:hash_method": {
-                  "$ref": "#/definitions/hash_method",
-                  "description": "An object describing the method used to compute the hashes."
-                },
-                "merkle:root": {
-                  "type": "string",
-                  "description": "The Merkle root hash representing the Collection."
-                }
-              },
-              "additionalProperties": true
+            "merkle:object_hash": {
+              "type": "string",
+              "description": "A cryptographic hash of the Collection's metadata."
+            },
+            "merkle:hash_method": {
+              "$ref": "#/definitions/hash_method",
+              "description": "An object describing the method used to compute the hashes."
+            },
+            "merkle:root": {
+              "type": "string",
+              "description": "The Merkle root hash representing the Collection."
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
     },
@@ -90,36 +83,29 @@
           "type": "object",
           "required": [
             "type",
-            "properties"
+            "id",
+            "merkle:object_hash",
+            "merkle:hash_method",
+            "merkle:root"
           ],
           "properties": {
             "type": {
               "const": "Catalog"
             },
-            "properties": {
-              "type": "object",
-              "required": [
-                "merkle:object_hash",
-                "merkle:hash_method",
-                "merkle:root"
-              ],
-              "properties": {
-                "merkle:object_hash": {
-                  "type": "string",
-                  "description": "A cryptographic hash of the Catalog's metadata."
-                },
-                "merkle:hash_method": {
-                  "$ref": "#/definitions/hash_method",
-                  "description": "An object describing the method used to compute the hashes."
-                },
-                "merkle:root": {
-                  "type": "string",
-                  "description": "The Merkle root hash representing the Catalog."
-                }
-              },
-              "additionalProperties": true
+            "merkle:object_hash": {
+              "type": "string",
+              "description": "A cryptographic hash of the Catalog's metadata."
+            },
+            "merkle:hash_method": {
+              "$ref": "#/definitions/hash_method",
+              "description": "An object describing the method used to compute the hashes."
+            },
+            "merkle:root": {
+              "type": "string",
+              "description": "The Merkle root hash representing the Catalog."
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
     }
