@@ -41,8 +41,8 @@ The fields in the table below can be used in these parts of STAC documents:
 #### `merkle:object_hash`
 
 - **Type:** string
-- **Description:** A cryptographic hash of the object's metadata (Item, Collection, or Catalog), computed according to the method specified in the `merkle:hash_method`. This hash allows users
-to verify that the object's metadata has not been altered.
+- **Description:** A cryptographic hash of the object's metadata (Item, Collection, or Catalog), computed according to the method specified in
+the `merkle:hash_method`. This hash allows users to verify that the object's metadata has not been altered.
 
 #### `merkle:hash_method`
 
@@ -56,13 +56,15 @@ to verify that the object's metadata has not been altered.
     - This provides transparency and allows users to accurately verify the hashes.
 - **Usage:**
     - **Collections and Catalogs:** This object is **REQUIRED**.
-    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own `merkle:hash_method` if it uses a different
-    hash method than the Collection.
+    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own
+    `merkle:hash_method` if it uses a different hash method than the Collection.
 
 #### `merkle:root`
 
 - **Type:** string
-- **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:object_hash` values of its child objects and, optionally, its own `merkle:object_hash`. This root hash provides a single value that represents the integrity of all underlying objects.
+- **Description:** The Merkle root hash representing the Collection or Catalog. It is computed by building a Merkle tree from the `merkle:object_hash`
+values of its child objects and, optionally, its own `merkle:object_hash`. This root hash provides a single value that represents the integrity of
+all underlying objects.
 
 ### Hash Method Object
 
@@ -71,7 +73,8 @@ The `merkle:hash_method` object provides details about the hash computation meth
 | Field Name    | Type       | Description                                                                                                                                                     |
 | ------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `function`    | string     | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`).                                                                                |
-| `fields`      | \[string\] | **REQUIRED** (for all objects). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). |
+| `fields`      | \[string\] | **REQUIRED** (for all objects). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate 
+that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). |
 | `ordering`    | string     | **REQUIRED** (for Collections and Catalogs). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by hash value").               |
 | `description` | string     | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations.                            |
 
@@ -98,7 +101,8 @@ The `merkle:hash_method` object provides details about the hash computation meth
 3. **Build Merkle Tree:**
    - Pairwise hash the ordered hashes, proceeding up the tree until a single hash remains—the `merkle:root`.
 4. **Include `merkle:hash_method`:**
-   - Specify the method used in the Collection's or Catalog's `merkle:hash_method` field, including any details necessary for users to replicate the process.
+   - Specify the method used in the Collection's or Catalog's `merkle:hash_method` field, including any details necessary for users
+   to replicate the process.
 
 ## Examples
 
