@@ -29,17 +29,14 @@
       ]
     }
   },
-  "template:new_field": "test",
-  "template:xyz": {
-    "x": 1,
-    "y": 2,
-    "z": 3
-  },
-  "template:another_one": [
-    1,
-    2,
-    3
-  ],
+  "merkle:object_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
+  "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:hash_method": {
+    "function": "sha256",
+    "fields": ["*"],
+    "ordering": "ascending",
+    "description": "Computed by including merkle:object_hash values in ascending order and building the Merkle tree."
+  }
   "assets": {
     "example": {
       "href": "https://example.com/examples/file.xyz",
