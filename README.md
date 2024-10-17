@@ -50,7 +50,7 @@ The fields in the table below can be used in these parts of STAC documents:
         - Any special considerations (e.g., serialization format).
     - This provides transparency and allows users to accurately verify the hashes.
 - **Usage:**
-    - **Collections and Catalogs:** This object is **REQUIRED** and must be included in the `properties` object.
+    - **Collections and Catalogs:** This object is **REQUIRED**.
     - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own `merkle:hash_method` if it uses a different hash method than the Collection.
 
 #### `merkle:root`
