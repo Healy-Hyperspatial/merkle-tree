@@ -48,16 +48,16 @@ the `merkle:hash_method`. This hash allows users to verify that the object's met
 
 - **Type:** [Hash Method Object](#hash-method-object)
 - **Description:**
-    - An object that specifies how `merkle:object_hash` and `merkle:root` were computed, including:
-    - The hash function used.
-        - The fields included in the hash computation.
-        - The ordering of hashes when building the Merkle tree.
-        - Any special considerations (e.g., serialization format).
-    - This provides transparency and allows users to accurately verify the hashes.
+  - An object that specifies how `merkle:object_hash` and `merkle:root` were computed, including:
+  - The hash function used.
+    - The fields included in the hash computation.
+    - The ordering of hashes when building the Merkle tree.
+    - Any special considerations (e.g., serialization format).
+  - This provides transparency and allows users to accurately verify the hashes.
 - **Usage:**
-    - **Collections and Catalogs:** This object is **REQUIRED**.
-    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own
-    `merkle:hash_method` if it uses a different hash method than the Collection.
+  - **Collections and Catalogs:** This object is **REQUIRED**.
+  - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own
+  `merkle:hash_method` if it uses a different hash method than the Collection.
 
 #### `merkle:root`
 
@@ -201,7 +201,8 @@ For contributions, please follow the
 [STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md). Instructions
 for running tests are copied here for convenience.
 
-**Note:** This extension is currently a proposal and is open for feedback from the STAC community. Your input is valuable to refine and adopt the Merkle Root Extension.
+**Note:** This extension is currently a proposal and is open for feedback from the STAC community. Your input is valuable to 
+refine and adopt the Merkle Root Extension.
 
 ### Running tests
 
