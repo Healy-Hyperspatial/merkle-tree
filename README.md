@@ -127,16 +127,13 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "stac_version": "1.1.0",
   "id": "collection-123",
   "description": "Sample Collection with Merkle Root",
-  "properties": {
-    "merkle:object_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
-    "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
-    "merkle:hash_method": {
-      "function": "sha256",
-      "fields": ["*"],
-      "ordering": "ascending",
-      "description": "Computed by including merkle:object_hash values in ascending order and building the Merkle tree."
-    }
-    // ... other properties
+  "merkle:object_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
+  "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:hash_method": {
+    "function": "sha256",
+    "fields": ["*"],
+    "ordering": "ascending",
+    "description": "Computed by including merkle:object_hash values in ascending order and building the Merkle tree."
   },
   "extent": {
     // ... spatial and temporal extent
@@ -144,7 +141,10 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "links": [
     // ... collection links
   ],
-  "license": "proprietary"
+  "license": "proprietary",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+  ]
 }
 ```
 
@@ -155,15 +155,13 @@ The `merkle:hash_method` object provides details about the hash computation meth
   "stac_version": "1.1.0",
   "id": "catalog-001",
   "description": "Sample Catalog with Merkle Root",
-  "properties": {
-    "merkle:object_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
-    "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
-    "merkle:hash_method": {
-      "function": "sha256",
-      "fields": ["*"],
-      "ordering": "ascending",
-      "description": "Computed by including merkle:object_hash values of child objects in ascending order and building the Merkle tree."
-    }
+  "merkle:object_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "merkle:hash_method": {
+    "function": "sha256",
+    "fields": ["*"],
+    "ordering": "ascending",
+    "description": "Computed by including merkle:object_hash values of child objects in ascending order and building the Merkle tree."
   },
   "links": [
     {
@@ -174,6 +172,9 @@ The `merkle:hash_method` object provides details about the hash computation meth
       "rel": "child",
       "href": "collection-456.json"
     }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
   ]
 }
 ```
