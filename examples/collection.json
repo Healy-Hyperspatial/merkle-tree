@@ -32,10 +32,12 @@
   "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
   "merkle:hash_method": {
     "function": "sha256",
-    "fields": ["*"],
+    "fields": [
+      "*"
+    ],
     "ordering": "ascending",
     "description": "Computed by including merkle:object_hash values in ascending order and building the Merkle tree."
-  }
+  },
   "assets": {
     "example": {
       "href": "https://example.com/examples/file.xyz",
