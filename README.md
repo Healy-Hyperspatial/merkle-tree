@@ -73,9 +73,7 @@ The `merkle:hash_method` object provides details about the hash computation meth
 | Field Name    | Type       | Description                                                                                                                                                     |
 | ------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `function`    | string     | **REQUIRED**. The cryptographic hash function used (e.g., `sha256`, `sha3-256`).                                                                                |
-| `fields`      | \[string\] | **REQUIRED** (for all objects). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate 
-that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). 
-                                    |
+| `fields`      | \[string\] | **REQUIRED** (for all objects). An array of fields included in the hash computation. Use `"*"` or `"all"` to indicate that all fields are included. For nested fields, dot notation should be used (e.g., `properties.datetime`, `assets.image`). |
 | `ordering`    | string     | **REQUIRED** (for Collections and Catalogs). Describes how the hashes are ordered when building the Merkle tree (e.g., "ascending by hash value").               |
 | `description` | string     | Optional. Additional details or notes about the hash computation method, such as serialization format or any special considerations.                            |
 
