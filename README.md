@@ -7,7 +7,10 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @jonhealy1
   
-This extension specifies a way to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle tree via hashing. Each STAC object (Item, Collection, or Catalog) is hashed using a hash function (e.g., SHA-256), and this hash is stored in the object's properties under the `merkle:object_hash` field. Details concerning the methods used for hashing are stored in a separate object called `merkle:hash_method`. To produce the Merkle root identifier for a Collection or Catalog, the hashes from its child objects are taken into account. This process ensures the integrity of all STAC objects within the hierarchy.
+This extension specifies a way to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle tree via hashing. Each STAC object (Item, Collection, or Catalog) 
+is hashed using a hash function (e.g., SHA-256), and this hash is stored in the object's properties under the `merkle:object_hash` field. Details concerning the methods used for hashing are stored 
+in a separate object called `merkle:hash_method`. To produce the Merkle root identifier for a Collection or Catalog, the hashes from its child objects are taken into account. This process ensures 
+the integrity of all STAC objects within the hierarchy.
 
 - **Examples:**
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item.
@@ -37,7 +40,8 @@ The fields in the table below can be used in these parts of STAC documents:
 #### `merkle:object_hash`
 
 - **Type:** string
-- **Description:** A cryptographic hash of the object's metadata (Item, Collection, or Catalog), computed according to the method specified in the `merkle:hash_method`. This hash allows users to verify that the object's metadata has not been altered.
+- **Description:** A cryptographic hash of the object's metadata (Item, Collection, or Catalog), computed according to the method specified in the `merkle:hash_method`. This hash allows users
+to verify that the object's metadata has not been altered.
 
 #### `merkle:hash_method`
 
@@ -51,7 +55,8 @@ The fields in the table below can be used in these parts of STAC documents:
     - This provides transparency and allows users to accurately verify the hashes.
 - **Usage:**
     - **Collections and Catalogs:** This object is **REQUIRED**.
-    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own `merkle:hash_method` if it uses a different hash method than the Collection.
+    - **Items:** Items inherit the `merkle:hash_method` from their parent Collection by default. An Item can optionally include its own `merkle:hash_method` if it uses a different
+    hash method than the Collection.
 
 #### `merkle:root`
 
