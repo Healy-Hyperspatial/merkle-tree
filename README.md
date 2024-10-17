@@ -7,10 +7,11 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @jonhealy1
   
-This extension specifies a way to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle tree via hashing. Each STAC object (Item, Collection, or Catalog) 
-is hashed using a hash function (e.g., SHA-256), and this hash is stored in the object's properties under the `merkle:object_hash` field. Details concerning the methods used for hashing are stored 
-in a separate object called `merkle:hash_method`. To produce the Merkle root identifier for a Collection or Catalog, the hashes from its child objects are taken into account. This process ensures 
-the integrity of all STAC objects within the hierarchy.
+This extension specifies a way to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle tree via 
+hashing. Each STAC object (Item, Collection, or Catalog) is hashed using a hash function (e.g., SHA-256), and this hash is stored in the 
+object's properties under the `merkle:object_hash` field. Details concerning the methods used for hashing are stored in a separate object 
+called `merkle:hash_method`. To produce the Merkle root identifier for a Collection or Catalog, the hashes from its child objects are taken 
+into account. This process ensures the integrity of all STAC objects within the hierarchy.
 
 - **Examples:**
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item.
@@ -31,9 +32,9 @@ The fields in the table below can be used in these parts of STAC documents:
 
 | Field Name            | Type                                   | Description                                                                                                                                           |
 | --------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `merkle:object_hash`  | string                                 | **REQUIRED** in Items, Collections, and Catalogs. A cryptographic hash of the object's metadata, used to verify its integrity.                         |
-| `merkle:hash_method`  | [Hash Method Object](#hash-method-object) | **REQUIRED** in Collections and Catalogs. An object describing the method used to compute `merkle:object_hash` and `merkle:root`, including the hash function used, fields included, ordering, and any special considerations. Items inherit this from their parent Collection but may include it if they use a different method. |
-| `merkle:root`         | string                                 | **REQUIRED** in Collections and Catalogs. The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all underlying objects. |
+| `merkle:object_hash` | string | **REQUIRED** in Items, Collections, and Catalogs. A cryptographic hash of the object's metadata, used to verify its integrity.                         |
+| `merkle:hash_method` | [Hash Method Object](#hash-method-object) | **REQUIRED** in Collections and Catalogs. An object describing the method used to compute `merkle:object_hash` and `merkle:root`, including the hash function used, fields included, ordering, and any special considerations. Items inherit this from their parent Collection but may include it if they use a different method. |
+| `merkle:root` | string | **REQUIRED** in Collections and Catalogs. The Merkle root hash representing the Collection or Catalog, used to verify the integrity of all underlying objects. |
 
 ### Additional Field Information
 
