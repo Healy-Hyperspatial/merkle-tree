@@ -113,7 +113,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+            "const": "https://raw.githubusercontent.com/Healy-Hyperspatial/merkle-tree-stac-extension/refs/heads/main/json-schema/schema.json"
           }
         }
       }
