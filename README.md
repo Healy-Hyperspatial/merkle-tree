@@ -1,7 +1,7 @@
 # Merkle Tree Extension Specification
 
 - **Title:** Merkle Tree
-- **Identifier:** <https://stac-extensions.github.io/merkle/v1.0.0/schema.json>
+- **Identifier:** <https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.2/schema.json>
 - **Field Name Prefix:** `merkle`
 - **Scope:** Item, Collection, Catalog
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
