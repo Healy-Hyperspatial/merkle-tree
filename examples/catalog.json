@@ -3,6 +3,9 @@
   "stac_version": "1.1.0",
   "id": "catalog-001",
   "description": "Sample Catalog with Merkle Root",
+  "stac_extensions": [
+    "https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.2/schema.json"
+  ],
   "merkle:object_hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
   "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
   "merkle:hash_method": {
@@ -22,8 +25,5 @@
       "rel": "child",
       "href": "collection-456.json"
     }
-  ],
-  "stac_extensions": [
-    "https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.1/schema.json"
   ]
 }
