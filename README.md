@@ -1,6 +1,6 @@
-# Merkle Root Extension Specification
+# Merkle Tree Extension Specification
 
-- **Title:** Merkle Root
+- **Title:** Merkle Tree
 - **Identifier:** <https://stac-extensions.github.io/merkle/v1.0.0/schema.json>
 - **Field Name Prefix:** `merkle`
 - **Scope:** Item, Collection, Catalog
