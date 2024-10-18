@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/Healy-Hyperspatial/merkle-tree-stac-extension/refs/heads/main/json-schema/schema.json#",
-  "title": "Merkle Root Extension",
+  "$id": "https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.1/schema.json#",
+  "title": "Merkle Tree Root Extension",
   "description": "An extension to ensure metadata integrity for STAC Items, Collections, and Catalogs by encoding them in a Merkle tree via hashing.",
   "oneOf": [
     {
@@ -113,7 +113,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://raw.githubusercontent.com/Healy-Hyperspatial/merkle-tree-stac-extension/refs/heads/main/json-schema/schema.json"
+            "const": "https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.1/schema.json"
           }
         }
       }
