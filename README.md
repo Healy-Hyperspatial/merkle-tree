@@ -1,7 +1,7 @@
 # Merkle Tree Extension Specification
 
 - **Title:** Merkle Tree
-- **Identifier:** <https://healy-hyperspatial.github.io/merkle-tree/v1.0.0-beta.2/schema.json>
+- **Identifier:** <https://stacchain.github.io/merkle-tree/v1.0.0-beta.2/schema.json>
 - **Field Name Prefix:** `merkle`
 - **Scope:** Item, Collection, Catalog
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -152,7 +152,7 @@ The `merkle:hash_method` object provides details about the hash computation meth
   ],
   "license": "proprietary",
   "stac_extensions": [
-    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+    "https://stacchain.github.io/merkle/v1.0.0/schema.json"
   ]
 }
 ```
@@ -183,7 +183,7 @@ The `merkle:hash_method` object provides details about the hash computation meth
     }
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/merkle/v1.0.0/schema.json"
+    "https://stacchain.github.io/merkle/v1.0.0/schema.json"
   ]
 }
 ```
