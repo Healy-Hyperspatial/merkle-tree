@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - first release
 
-[Unreleased]: https://github.com/Healy-Hyperspatial/merkle-tree-stac-extension/tree/v1.0.0-beta.2...main
-[v1.0.0-beta.2]: https://github.com/Healy-Hyperspatial/merkle-tree-stac-extension/tree/v1.0.0-beta.1...v1.0.0-beta.2
-[v1.0.0-beta.1]: https://github.com/Healy-Hyperspatial/merkle-tree-stac-extension/tree/v1.0.0-beta.1
+[Unreleased]: https://github.com/stacchain/merkle-tree-stac-extension/tree/v1.0.0-beta.2...main
+[v1.0.0-beta.3]: https://github.com/stacchain/merkle-tree-stac-extension/tree/v1.0.0-beta.1...v1.0.0-beta.2
+[v1.0.0-beta.2]: https://github.com/stacchain/merkle-tree-stac-extension/tree/v1.0.0-beta.1...v1.0.0-beta.2
+[v1.0.0-beta.1]: https://github.com/stacchain/merkle-tree-stac-extension/tree/v1.0.0-beta.1
