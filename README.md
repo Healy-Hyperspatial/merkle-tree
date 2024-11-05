@@ -1,7 +1,7 @@
 # Merkle Tree Extension Specification
 
 - **Title:** Merkle Tree
-- **Identifier:** <https://stacchain.github.io/merkle-tree/v1.0.0-beta.3/schema.json>
+- **Identifier:** <https://stacchain.github.io/merkle-tree/v1.0.0/schema.json>
 - **Field Name Prefix:** `merkle`
 - **Scope:** Item, Collection, Catalog
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
