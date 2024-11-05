@@ -10,17 +10,31 @@
   "license": "Apache-2.0",
   "extent": {
     "spatial": {
-      "bbox": [[172.9, 1.3, 173, 1.4]]
+      "bbox": [
+        [
+          172.9,
+          1.3,
+          173,
+          1.4
+        ]
+      ]
     },
     "temporal": {
-      "interval": [["2015-06-23T00:00:00Z", null]]
+      "interval": [
+        [
+          "2015-06-23T00:00:00Z",
+          null
+        ]
+      ]
     }
   },
   "merkle:object_hash": "7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
   "merkle:root": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
   "merkle:hash_method": {
     "function": "sha256",
-    "fields": ["*"],
+    "fields": [
+      "*"
+    ],
     "ordering": "ascending",
     "description": "Computed by including merkle:object_hash values in ascending order and building the Merkle tree."
   },

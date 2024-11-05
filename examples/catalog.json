@@ -10,7 +10,9 @@
   "merkle:root": "f1e2d3c4b5a67890abcdef1234567890abcdef1234567890abcdef1234567890",
   "merkle:hash_method": {
     "function": "sha256",
-    "fields": ["*"],
+    "fields": [
+      "*"
+    ],
     "ordering": "ascending",
     "description": "Computed by including merkle:object_hash values of child objects in ascending order and building the Merkle tree."
   },
