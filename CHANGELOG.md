@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [v1.0.0-beta.3] - 2024-11-05
+
+- move extension to stacchain org
+
 ## [v1.0.0-beta.2] - 2024-10-18
 
 - update schema links via template
